@@ -61,7 +61,7 @@ public class AuthorServiceImpl implements AuthorService{
 
 	@Override
 	public AuthorDto getAuthorByUsername(String username) {
-		AuthorEntity author = authorRepository.findByUsername(username);
+		AuthorEntity author = authorRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Author not found!"));
 		AuthorDto ae = costruisciDaEntity(author);
 		return ae;
 	}
