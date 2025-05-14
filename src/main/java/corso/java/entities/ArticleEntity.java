@@ -37,9 +37,9 @@ public class ArticleEntity {
 	private AuthorEntity author;
 	@Enumerated(EnumType.STRING)
 	private Category category;
-	@OneToMany
+	@OneToMany(mappedBy="article")
 	private List<CommentEntity> comments;
-	@Column(length = 50, nullable = false)
+	@Column(nullable = false)
 	private LocalDate publishDate;
 
 }

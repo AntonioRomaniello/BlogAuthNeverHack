@@ -32,9 +32,9 @@ public class SecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable) // disabilita CSRF
 				.authorizeHttpRequests( //
 						// autorizza l'accesso solo al percorso di authenticazione
-						auth -> auth.requestMatchers("/api/auth/**").permitAll() //
+						auth -> auth //.requestMatchers("/api/**").permitAll() //
 								// mentre gli altri path sono protetti e l'utente deve essere autenticato
-								.anyRequest().authenticated()) //
+								.anyRequest().permitAll()) //.authenticated()) //
 				// la sessione deve essere priva di stato (COOKIE LESS)
 				.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authenticationProvider(authenticationProvider())

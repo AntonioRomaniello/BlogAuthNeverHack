@@ -34,17 +34,17 @@ public class AuthorController {
 		return ResponseEntity.ok(a);
 	}
 	
-	@PostMapping("/delete")
+	@PostMapping("delete")
 	public void deleteAuthor(@RequestParam int authorId) {
 		authorService.deleteAuthor(authorId);
 	}
 	
-	@GetMapping("/{username}")
+	@GetMapping("{username}")
 	public ResponseEntity<AuthorDto> getAuthorByUsername(@PathVariable String username){
 		return ResponseEntity.ok(authorService.getAuthorByUsername(username));
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("update")
 	public void updateAuthor(@RequestBody AuthorDto author) {
 		authorService.updateAuthor(author);
 	}

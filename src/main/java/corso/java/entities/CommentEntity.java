@@ -37,7 +37,7 @@ public class CommentEntity {
 	private ArticleEntity article;
 	@ManyToOne
 	private AuthorEntity author;
-	@Column(length = 50, nullable = false)
+	@Column(nullable = false)
 	private LocalDate date;
 	
 	

@@ -34,7 +34,7 @@ public class AuthorEntity {
 	@Column(nullable = false, length = 25)
 	String password;
 	@Column(nullable = false)
-	LocalDateTime BirthDate;
+	LocalDateTime birthDate;
 	@Column(nullable = false)
 	Gender gender;
 	@OneToMany(mappedBy="author", cascade = CascadeType.ALL)
