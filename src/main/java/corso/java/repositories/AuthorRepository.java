@@ -10,5 +10,4 @@ import corso.java.entities.AuthorEntity;
 public interface AuthorRepository extends JpaRepository<AuthorEntity, Integer>{
 	
 	public AuthorEntity findByUsername(String username);
-
 }
