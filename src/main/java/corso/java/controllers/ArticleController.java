@@ -15,7 +15,7 @@ import corso.java.repositories.ArticleRepository;
 import corso.java.services.ArticleService;
 
 @RestController
-@RequestMapping ("/api")
+@RequestMapping ("/api/article")
 public class ArticleController {
 	private ArticleService articleService;
 	@PostMapping("/addArticle")
