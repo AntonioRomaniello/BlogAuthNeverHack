@@ -53,27 +53,33 @@ public class AuthorServiceImpl implements AuthorService{
 					.map(a -> costruisciDaEntity(a)).toList();
 			return authors;
 		}catch (Exception e) {
-			throw new ServiceException("Error!!!!");
+			throw new ServiceException("Error! The List is empty!");
 		}
 
 	}
 
 	@Override
 	public AuthorDto getAuthorByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		AuthorEntity author = authorRepository.findByUsername(username);
+		AuthorDto ae = costruisciDaEntity(author);
+		return ae;
 	}
 
 	@Override
 	public void updateAuthor(AuthorDto author) {
-		// TODO Auto-generated method stub
-		
+		AuthorEntity ae = authorRepository.findById(author.getId()).orElseThrow(() -> new RuntimeException("Author not found!"));
+		ae.setEmail(author.getEmail());
+		ae.setPassword(author.getPassword());
+		authorRepository.save(ae);	
 	}
 
 	@Override
 	public void deleteAuthor(int authorId) {
-		// TODO Auto-generated method stub
-		
+		try {
+			authorRepository.deleteById(authorId);
+		} catch (Exception e) {
+			throw new ServiceException("Error! Author with ID: "+authorId+" Not Found!");
+		}
 	}
 
 }
