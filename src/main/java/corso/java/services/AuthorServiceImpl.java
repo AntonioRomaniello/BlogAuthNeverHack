@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import corso.java.dto.AuthorDto;
 import corso.java.entities.AuthorEntity;
 import corso.java.repositories.AuthorRepository;
-
+@Service
 public class AuthorServiceImpl implements AuthorService{
 
 	@Autowired
@@ -72,7 +73,6 @@ public class AuthorServiceImpl implements AuthorService{
 		ae.setPassword(author.getPassword());
 		authorRepository.save(ae);	
 	}
-
 	@Override
 	public void deleteAuthor(int authorId) {
 		try {
@@ -81,5 +81,4 @@ public class AuthorServiceImpl implements AuthorService{
 			throw new ServiceException("Error! Author with ID: "+authorId+" Not Found!");
 		}
 	}
-
 }

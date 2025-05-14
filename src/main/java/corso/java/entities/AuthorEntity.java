@@ -39,4 +39,6 @@ public class AuthorEntity {
 	Gender gender;
 	@OneToMany(mappedBy="author", cascade = CascadeType.ALL)
 	List<ArticleEntity> articles;
+	 
+	
 }
