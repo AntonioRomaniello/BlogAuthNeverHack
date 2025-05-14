@@ -21,17 +21,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(setterPrefix="with")
+@Builder(setterPrefix = "with")
 public class ArticleDto {
 
 	private String title;
 
 	private String content;
 
-	private int authorId;
+	private AuthorEntity author;
 
 	private Category category;
-
-
 
 }

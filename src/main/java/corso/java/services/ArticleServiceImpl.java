@@ -2,6 +2,7 @@ package corso.java.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,9 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	AuthorRepository authorRepository;
 	@Override
-	public void addArticle(ArticleDto insertArticle) {
+	public ArticleDto addArticle(ArticleDto insertArticle) {
 		ArticleEntity article = ArticleEntity.builder()
-				.withAuthor(authorRepository.findById(insertArticle.getAuthorId()).orElseThrow())
+				.withAuthor(authorRepository.findById(insertArticle.getAuthor().getId()).orElseThrow())
 				.withCategory(insertArticle.getCategory())
 				.withContent(insertArticle.getContent())
 				.withPublishDate(LocalDate.now())
@@ -31,19 +32,25 @@ public class ArticleServiceImpl implements ArticleService {
 				
 		articleRepository.save(article);
 		
-		
+		return insertArticle;
 	}
 
 	@Override
 	public void modifyArticle() {
-		// TODO Auto-generated method stub
+	
 
 	}
 
 	@Override
 	public List<ArticleDto> showAllArticle() {
-		// TODO Auto-generated method stub
-		return null;
+		List <ArticleDto> list = articleRepository.findAll().stream().map(a-> ArticleDto.builder()
+				.withCategory(a.getCategory())
+				.withAuthor(a.getAuthor())
+				.withContent(a.getContent())
+				.withTitle(a.getTitle()).build()).toList();
+				
+			return list;
+		
 	}
 
 }
