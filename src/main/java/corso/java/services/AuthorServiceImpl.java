@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import corso.java.dto.AuthorDto;
 import corso.java.entities.AuthorEntity;
-import corso.java.entities.Azienda_Entity;
 import corso.java.repositories.AuthorRepository;
 
 public class AuthorServiceImpl implements AuthorService{
@@ -19,32 +18,39 @@ public class AuthorServiceImpl implements AuthorService{
 		this.authorRepository = authorRepository;
 	}
 	
+	private AuthorEntity costruisciDaDto(AuthorDto a) {
+		return AuthorEntity.builder().withUsername(a.getUsername())
+		.withEmail(a.getEmail())
+		.withPassword(a.getPassword())
+		.withId(a.getId())
+		.withGender(a.getGender())
+		.withBirthDate(a.getBirthDate())
+		.build();
+	}
+	
+	private AuthorDto costruisciDaEntity(AuthorEntity a) {
+		return AuthorDto.builder().withUsername(a.getUsername())
+		.withEmail(a.getEmail())
+		.withPassword(a.getPassword())
+		.withId(a.getId())
+		.withGender(a.getGender())
+		.withBirthDate(a.getBirthDate())
+		.build();
+	}
+	
 	
 	@Override
 	public void addAuthor(AuthorDto authorDto) {
-		AuthorEntity author =AuthorEntity.builder()
-				.withUsername(authorDto.getUsername())
-				.withEmail(authorDto.getEmail())
-				.withPassword(authorDto.getPassword())
-				.withId(authorDto.getId())
-				.withGender(authorDto.getGender())
-				.withBirthDate(authorDto.getBirthDate())
-				.build();
+		AuthorEntity author = costruisciDaDto(authorDto);
 		authorRepository.save(author);
-		
 	}
 
 	@Override
 	public List<AuthorDto> getAllAuthors() {
 		
 		try {
-			List<AuthorDto> authors = authorRepository.findAll().stream().map(a -> AuthorDto.builder().withUsername(a.getUsername())
-					.withEmail(a.getEmail())
-					.withPassword(a.getPassword())
-					.withId(a.getId())
-					.withGender(a.getGender())
-					.withBirthDate(a.getBirthDate())
-					.build()).toList();
+			List<AuthorDto> authors = authorRepository.findAll().stream()
+					.map(a -> costruisciDaEntity(a)).toList();
 			return authors;
 		}catch (Exception e) {
 			throw new ServiceException("Error!!!!");
