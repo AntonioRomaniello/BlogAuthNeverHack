@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -31,7 +32,8 @@ public class ArticleEntity {
 	private String title;
 	@Column(length = 50, nullable = false)
 	private String content;
-	@Column(length = 5000, nullable = false)
+	
+	@ManyToOne
 	private AuthorEntity author;
 	@Enumerated(EnumType.STRING)
 	private Category category;
